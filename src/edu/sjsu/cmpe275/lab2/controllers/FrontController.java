@@ -30,12 +30,10 @@ public class FrontController {
 	
 	@RequestMapping(value = "submitUserForm", method = RequestMethod.POST)
 	public ModelAndView submitUserForm(@ModelAttribute("user") User user){
-		
+				
 		UserDao dao = context.getBean(UserDao.class);
-		//UserDao dao = new UserDao();
 		dao.createUser(user);
-		System.out.println(user.getFirstname());
-		ModelAndView model = new ModelAndView("UserSuccess");
+		ModelAndView model = new ModelAndView("UserSuccess"); 
 		return model;
 	}
 }

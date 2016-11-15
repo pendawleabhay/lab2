@@ -4,6 +4,7 @@
  
 	<form action="/lab2/submitUserForm" method="post">
 	   <input type="text" name="firstname" />
+	   <input type="text" name="address.city" />
 		<input type="submit" value="Submit" />
 	</form>
 	
