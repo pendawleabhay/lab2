@@ -1,5 +1,7 @@
  package edu.sjsu.cmpe275.lab2.dao;
 
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.sjsu.cmpe275.lab2.entities.Address;
 import edu.sjsu.cmpe275.lab2.entities.User;
 
-
 @Repository
 public class UserDao {
 
@@ -19,20 +20,20 @@ public class UserDao {
 	private EntityManager entitymanager;
 	
 	 @Transactional
-	public void createUser(User user)
+	public User createUser(Map<String, String> queryMap)
 	{
-		/*EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "lab2" );
-	      EntityManager entitymanager = emfactory.createEntityManager( );
-	      entitymanager.getTransaction( ).begin( );
-	      entitymanager.persist(user);
-	      entitymanager.getTransaction( ).commit( );
-	      entitymanager.close( );
-	      emfactory.close( );*/
-	     
-		 /*Address  address = new Address();
-		 address.setCity("pune");
-		 user.setAddress(address);*/
-		 
-		 entitymanager.merge(user);
+		//create address
+		Address address = new Address();
+		address.setCity(queryMap.get("city"));
+		
+		//create user
+		User user = new User();
+		user.setFirstname(queryMap.get("firstname"));
+		user.setAddress(address);
+		
+		//store user in db
+		entitymanager.merge(user);
+		
+		return user;
 	}
 }
