@@ -36,4 +36,10 @@ public class UserDao {
 		
 		return user;
 	}
+	 
+	 public User getUser(int userId)
+	 {
+		 User user = entitymanager.find(User.class, userId);
+		return user; 
+	 }
 }
