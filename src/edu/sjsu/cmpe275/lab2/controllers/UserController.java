@@ -22,46 +22,39 @@ import edu.sjsu.cmpe275.lab2.entities.Phone;
 import edu.sjsu.cmpe275.lab2.entities.User;
 
 @Controller
-public class FrontController 
+@RequestMapping(value = "/user")
+public class UserController 
 {
 	
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-
-	@RequestMapping(value="/")
-	public ModelAndView homePage() 
+	
+	@RequestMapping(value="")
+	public ModelAndView userForm()
 	{
-		ModelAndView model = new ModelAndView("index");
+		
+		ModelAndView model = new ModelAndView("User/UserForm");
 		return model;
 	}
-	
-	@RequestMapping(value = "user/userId", method = RequestMethod.POST)
-	public ModelAndView createUser(@RequestParam Map<String, String> queryMap )
+
+	@RequestMapping(value = "/userId"  /*, method = RequestMethod.POST*/)
+	public ModelAndView createUser(  @RequestParam Map<String, String> queryMap)
 	{
 			
 		UserDao dao = context.getBean(UserDao.class);
 		User user = dao.createUser(queryMap);
-		ModelAndView model = new ModelAndView("UserSuccess"); 
+		ModelAndView model = new ModelAndView("User/UserSuccess"); 
 		model.addObject(user);
 		return model;
 	}
 	
-	@RequestMapping(value = "user/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{userId}")
 	public ModelAndView getUser(@PathVariable("userId") int userId)
 	{
 		UserDao dao = context.getBean(UserDao.class);
 		User user = dao.getUser(userId);
-		ModelAndView model = new ModelAndView("UserSuccess"); 
+		ModelAndView model = new ModelAndView("User/UserDetail"); 
 		model.addObject(user);
 		return model;
 	}
 	
-	@RequestMapping(value = "phone/phoneId", method = RequestMethod.GET)
-	public ModelAndView createPhone(@RequestParam Map<String, String> queryMap, @RequestParam("users[]") int[] userIds)
-	{
-		PhoneDao dao = context.getBean(PhoneDao.class);
-		Phone phone = dao.createPhone(queryMap, userIds);
-		ModelAndView model = new ModelAndView("PhoneSuccess"); 
-		model.addObject(phone);
-		return model;
-	}
 }

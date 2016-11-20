@@ -16,21 +16,21 @@ public class User {
 		
 		@Column(name = "firstname")
 		  private String firstname;
+		
+		@Column(name = "lastname")
+		private String lastname;
+		
+		@Column(name = "title")
+		private String title;
 		  
 		  @Embedded
 		  private Address address;
 		  
+		  @JoinTable(name="phone_user", joinColumns = { @JoinColumn(name = "users_userId", referencedColumnName = "userId")},
+			        inverseJoinColumns = { @JoinColumn(name = "Phone_phoneId", referencedColumnName = "phoneId") } )
+		  @ManyToMany
 		    private List<Phone> phones = new ArrayList<Phone>();
 		
-		  public List<Phone> getPhoneList()
-			{
-				return phones;
-			}
-			
-			public void setPhoneList(List<Phone> phoneList)
-			{
-				this.phones = phoneList;
-			}
 		  
 			public int getUserId()
 			{
@@ -59,6 +59,37 @@ public class User {
 			public void setFirstname(String firstname) {
 				this.firstname = firstname;
 			}
+
+			public String getLastname()
+			{
+				return lastname;
+			}
+
+			public void setLastname(String lastname)
+			{
+				this.lastname = lastname;
+			}
+
+			public String getTitle()
+			{
+				return title;
+			}
+
+			public void setTitle(String title)
+			{
+				this.title = title;
+			}
+
+			public List<Phone> getPhones()
+			{
+				return phones;
+			}
+
+			public void setPhones(List<Phone> phones)
+			{
+				this.phones = phones;
+			}
 		      
+			
    
 }

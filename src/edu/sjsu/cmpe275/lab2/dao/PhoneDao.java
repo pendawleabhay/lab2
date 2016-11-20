@@ -25,14 +25,17 @@ public class PhoneDao
 		//create address
 		Address address = new Address();
 		address.setCity(queryMap.get("city"));
+		address.setState(queryMap.get("state"));
+		address.setStreet(queryMap.get("street"));
+		address.setZip(queryMap.get("zip"));
 		
 		//create phone
 		Phone phone = new Phone();
 		phone.setNumber(queryMap.get("number"));
+		phone.setDescription(queryMap.get("description"));
 		phone.setAddress(address);
 		
-		//create user
-		//UserDao dao = new UserDao();
+		//add user to list
 		for(int i=0; i<userIds.length; i++)
 		{
 			ClassPathXmlApplicationContext context1 = new ClassPathXmlApplicationContext("beans.xml");

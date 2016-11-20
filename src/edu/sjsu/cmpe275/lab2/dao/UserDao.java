@@ -25,10 +25,21 @@ public class UserDao {
 		//create address
 		Address address = new Address();
 		address.setCity(queryMap.get("city"));
+		address.setState(queryMap.get("state"));
+		address.setStreet(queryMap.get("street"));
+		address.setZip(queryMap.get("zip"));
+		
 		
 		//create user
 		User user = new User();
+		if(queryMap.containsKey("userId"))
+		{
+			int userId = Integer.parseInt(queryMap.get("userId"));
+			user.setUserId(userId);
+		}
 		user.setFirstname(queryMap.get("firstname"));
+		user.setLastname(queryMap.get("lastname"));
+		user.setTitle(queryMap.get("title"));		
 		user.setAddress(address);
 		
 		//store user in db

@@ -27,10 +27,33 @@ public class Phone
 	@Column(name = "number")	 
 	private String number;
 	
+	@Column(name = "description")	 	
+	private String description;
+	
 	@Embedded
     private Address address;
 	
-    private List<User> users = new ArrayList<User>();
+    public int getPhoneId()
+	{
+		return phoneId;
+	}
+
+	public void setPhoneId(int phoneId)
+	{
+		this.phoneId = phoneId;
+	}
+
+	public String getDescription()
+	{
+		return description;
+	}
+
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
+
+	private List<User> users = new ArrayList<User>();
 
 	public List<User> getUserList()
 	{
